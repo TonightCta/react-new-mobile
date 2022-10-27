@@ -1,0 +1,14 @@
+.nav-bottom {
+  height: 48px;
+  background-color: white;
+  width: 100%;
+  position: fixed;
+  left: 50%;
+  margin-left: -50%;
+  bottom: 0;
+  border-top: 1px solid #f8f8f8;
+  .adm-tab-bar-item-active{
+    color: #4266FF;
+    font-weight: bold;
+  }
+}
