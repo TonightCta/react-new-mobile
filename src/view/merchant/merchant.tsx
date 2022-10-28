@@ -13,7 +13,7 @@ const MerchantView = (): ReactElement<ReactNode> => {
     const { state, dispatch } = useContext(IBPayMobile);
     return (
         <div className='merchant-view'>
-            <MerchantNav state={state} />
+            {/* <MerchantNav state={state} /> */}
             <div className='tabs-mine'>
                 <Tabs onChange={(e) => {
                     dispatch({

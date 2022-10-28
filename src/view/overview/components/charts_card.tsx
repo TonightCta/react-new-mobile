@@ -28,7 +28,7 @@ const ChartsCard = (): ReactElement<ReactNode> => {
         end: ''
     });
     const billViewService = async () => {
-        const { merchant_id,account } = state;
+        const { merchant_id, account } = state;
         const result = await BillViewApi({
             mch_id: merchant_id || JSON.parse(account || '{}')?.merchantInfo.mch_id,
             coin: coin,
@@ -37,7 +37,7 @@ const ChartsCard = (): ReactElement<ReactNode> => {
         });
         const { data } = result;
         const date = data.deposits.map((item: { date: string; }) => {
-            return item.date.substring(5,10);
+            return item.date.substring(5, 10);
         });
         const deposits = data.deposits.map((item: { total: string; }) => {
             return item.total;
@@ -51,7 +51,7 @@ const ChartsCard = (): ReactElement<ReactNode> => {
         const userWithdraw = data.userWithdraw.map((item: { total: string; }) => {
             return item.total;
         });
-        initEcharts(date,deposits,withdraw,userDeposits,userWithdraw)
+        initEcharts(date, deposits, withdraw, userDeposits, userWithdraw)
     }
     //下载echarts
     const downEcharts = () => {
@@ -69,7 +69,7 @@ const ChartsCard = (): ReactElement<ReactNode> => {
             }
         );
     };
-    const initEcharts = (date:[],deposits:[],withdraw:[],userDeposits:[],userWithdraw:[]) => {
+    const initEcharts = (date: [], deposits: [], withdraw: [], userDeposits: [], userWithdraw: []) => {
         const option = {
             tooltip: {
                 trigger: "axis",
@@ -146,19 +146,7 @@ const ChartsCard = (): ReactElement<ReactNode> => {
                     type: "line",
                     stack: "Total",
                     itemStyle: {
-                        color: "rgb(101,220,123)",
-                    },
-                    areaStyle: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                            {
-                                offset: 0,
-                                color: "rgba(101,220,123,.3)",
-                            },
-                            {
-                                offset: 1,
-                                color: "rgba(101,220,123,.1)",
-                            },
-                        ]),
+                        color: "#ED6F86",
                     },
                     emphasis: {
                         focus: "series",
@@ -170,19 +158,7 @@ const ChartsCard = (): ReactElement<ReactNode> => {
                     type: "line",
                     stack: "Total",
                     itemStyle: {
-                        color: "rgb(76,227,249)",
-                    },
-                    areaStyle: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                            {
-                                offset: 0,
-                                color: "rgba(76,227,249,.3)",
-                            },
-                            {
-                                offset: 1,
-                                color: "rgba(76,227,249,0.1)",
-                            },
-                        ]),
+                        color: "#2FC25B",
                     },
                     emphasis: {
                         focus: "series",
@@ -194,19 +170,7 @@ const ChartsCard = (): ReactElement<ReactNode> => {
                     type: "line",
                     stack: "Total",
                     itemStyle: {
-                        color: "rgb(255,212,130)",
-                    },
-                    areaStyle: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                            {
-                                offset: 0,
-                                color: "rgba(255,212,130,.4)",
-                            },
-                            {
-                                offset: 1,
-                                color: "rgba(255,212,130,0.2)",
-                            },
-                        ]),
+                        color: "#1890FF",
                     },
                     emphasis: {
                         focus: "series",
@@ -218,19 +182,7 @@ const ChartsCard = (): ReactElement<ReactNode> => {
                     type: "line",
                     stack: "Total",
                     itemStyle: {
-                        color: "rgb(107,128,251)",
-                    },
-                    areaStyle: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                            {
-                                offset: 0,
-                                color: "rgba(107,128,251,.3)",
-                            },
-                            {
-                                offset: 1,
-                                color: "rgba(107,128,251,0.1)",
-                            },
-                        ]),
+                        color: "#F5B544",
                     },
                     emphasis: {
                         focus: "series",
@@ -247,7 +199,7 @@ const ChartsCard = (): ReactElement<ReactNode> => {
     }
     useEffect(() => {
         billViewService();
-    }, [coin, filterDate.start,filterDate.end,state.merchant_id]);
+    }, [coin, filterDate.start, filterDate.end, state.merchant_id]);
     useEffect(() => {
         const { account } = state;
         const support = JSON.parse(account || '{}').coinStatementList.map((item: { asset: any; }) => {
@@ -283,15 +235,18 @@ const ChartsCard = (): ReactElement<ReactNode> => {
                         trigger='click'
                     >
                         <div className='select-coin'>
-                            <p>{coin}</p>&nbsp;<p className='iconfont icon-xialajiantouxiaobeifen'></p>
+                            <p>{coin}</p>&nbsp;<p className='iconfont icon-bizhongmingxi'></p>
                         </div>
                     </Popover.Menu>
-                    <div className='select-date down-charts' onClick={() => { downEcharts() }}>
-                        <p className='iconfont icon-cangpeitubiao_xiazaipandiandanxiazaidayinmoban'></p>
-                    </div>
+
                 </div>
             </div>
-            <div className='charts-box' id="charts-box"></div>
+            <div className='charts-parent'>
+                <div className='down-charts' onClick={() => { downEcharts() }}>
+                    <p className='iconfont icon-cangpeitubiao_xiazaipandiandanxiazaidayinmoban'></p>
+                </div>
+                <div className='charts-box' id="charts-box"></div>
+            </div>
             {/* 选择日期 - 开始时间 */}
             <DatePicker
                 title='开始时间'

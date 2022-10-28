@@ -1,49 +1,63 @@
 .over-view {
   padding: 16px 12px;
-  padding-bottom: 60px;
+  padding-top: 24px;
   .account-card {
-    padding: 21px 10px 8px;
-    background-color: white;
+    padding: 8px;
+    border: 1px solid #e5dfff;
     border-radius: 4px;
     position: relative;
     text-align: center;
-    .sign-out {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 12px;
-      color: #5a6dfe;
-      padding: 5px 7px;
-      background-color: #f2f3ff;
-      border-radius: 4px;
-      .iconfont {
-        font-size: 12px;
-      }
-    }
-    .ib-avatar {
-      text-align: center;
-      img {
-        width: 60px;
-        height: 60px;
-      }
-    }
-    .account-name {
-      font-size: 16px;
-      color: #333;
-      font-weight: 500;
-      margin-bottom: 4px;
-      margin-bottom: 8px;
+    padding-top: 46px;
+    .account-name-avtar {
+      height: 52px;
+      width: calc(100% - 80px);
+      background: linear-gradient(138deg, #7c61ff 0%, #5a38fc 100%);
       display: flex;
+      justify-content: space-between;
+      position: absolute;
+      top: -26px;
+      left: 40px;
       align-items: center;
-      justify-content: center;
-      img {
-        width: 16px;
-        height: 16px;
-        margin-left: 6px;
+      padding: 0 20px 0 14px;
+      border-radius: 6px;
+      .ib-avatar {
+        display: flex;
+        align-items: center;
+        .avatar-box {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          overflow: hidden;
+          img {
+            height: 100%;
+          }
+        }
+        p {
+          margin-left: 7px;
+          color: white;
+          font-size: 14px;
+          font-weight: 500;
+        }
+      }
+      .select-merchant-icon {
+        width: 14px;
+        height: 14px;
+        border: 1px solid white;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .iconfont {
+          color: white;
+          font-size: 13px;
+        }
       }
     }
     .auth-status {
-      padding: 5px 10px;
+      padding: 0 10px;
       border-radius: 4px;
       border: 1px solid #f0516b;
       background-color: #fef2f6;
@@ -51,12 +65,24 @@
       color: #f0516b;
       font-weight: 500;
       display: inline-block;
-      transform: translateY(-14px);
+      height: 28px;
+      line-height: 28px;
+      position: relative;
       img {
         width: 12px;
         height: 8px;
         margin-left: 4px;
       }
+    }
+    .auth-status::after {
+      content: "";
+      display: inline-block;
+      width: 1px;
+      height: 18px;
+      background-color: #eee;
+      position: absolute;
+      right: -11px;
+      top: 4px;
     }
     .has-auth {
       background-color: #effff8;
@@ -67,13 +93,15 @@
       display: flex;
       justify-content: space-between;
       margin-bottom: 14px;
+      align-items: center;
       button {
         font-size: 12px;
-        width: calc(33% - 6px);
-        background-color: #f2f3ff;
-        border: 0;
-        color: #5e6ffe;
-        height: 30px;
+        width: calc(24% - 6px);
+        border: 1px solid rgba(104, 50, 255, 0.24);
+        background: rgba(93, 59, 252, 0.04);
+        color: #5c3bfc;
+        height: 28px;
+        white-space: nowrap;
       }
       button:last-child {
         span {
@@ -85,29 +113,28 @@
         }
       }
     }
-    .oper-line {
-      width: calc(100% - 180px);
-      margin: 0 auto;
-      height: 1px;
-      background-color: #f8f8f8;
-      margin-bottom: 12px;
-    }
     .login-msg {
-      display: flex;
-      justify-content: space-between;
+      padding: 12px 24px;
+      border: 1px solid #e5dfff;
+      border-radius: 4px;
       .msg-public {
-        width: calc(50% - 7px);
-        padding: 14px 0;
-        background-color: #f8f8f8;
-        border-radius: 8px;
-        p {
-          font-size: 12px;
+        display: flex;
+        p:first-child {
+          width: 80px;
+          text-align-last: justify;
+          margin-right: 16px;
+          color: #999;
+        }
+        p:last-child {
           color: #666;
         }
-        p:first-child {
-          font-weight: 500;
-          margin-bottom: 8px;
+        p {
+          font-size: 12px;
         }
+        margin-bottom: 8px;
+      }
+      .msg-public:last-child {
+        margin-bottom: 0;
       }
     }
   }
@@ -117,108 +144,130 @@
       flex-wrap: wrap;
       justify-content: space-between;
       li {
-        padding: 18px 12px;
+        padding: 12px 6px 20px;
         border-radius: 4px;
         width: calc(50% - 7px);
         margin-top: 12px;
         position: relative;
+        border-radius: 4px;
+        border: 1px solid #e5dfff;
+        display: flex;
         .item-name {
-          color: rgba(255, 255, 255, 0.65);
-          font-size: 14px;
+          color: #666;
+          font-size: 12px;
           text-align: left;
+          padding-top: 8px;
           display: flex;
           align-items: center;
-          span {
-            color: white;
-            margin-right: 4px;
-            font-size: 16px;
-          }
           .count-detail {
             font-size: 12px;
             display: flex;
             align-items: center;
-            color: rgba(255, 255, 255, 0.7);
+            color: #999;
             transform: translateY(1px);
             padding-left: 4px;
-            img {
-              width: 10px;
-              height: 10px;
-              margin-left: 4px;
-              transform: translateY(-1px);
+            .detail-icon {
+              margin-left: 3px;
+              width: 12px;
+              height: 12px;
+              background-color: rgba(193, 193, 193, 0.14);
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              .iconfont {
+                font-size: 12px;
+              }
             }
+          }
+          .count-detail {
+            position: absolute;
+            right: 4px;
+            bottom: 8px;
           }
         }
         .item-count {
           display: flex;
           align-items: center;
           .count-text {
-            font-size: 24px;
-            color: white;
+            font-size: 17px;
+            color: #333;
             font-weight: 500;
             text-align: left;
-            margin-top: 12px;
+            margin-top: 4px;
+            span {
+              margin-left: 2px;
+            }
           }
         }
         .item-bg-icon {
-          position: absolute;
-          right: 0;
-          bottom: -6px;
+          margin-right: 6px;
           img {
-            width: 74px;
-            height: 86px;
+            width: 47px;
+            height: 47px;
           }
         }
       }
-      li:last-child {
-        width: 100%;
+      .img-mask {
+        position: absolute;
+        width: calc(50% + 6px);
+        bottom: 0;
+        height: 106px;
+        right: 0;
+        background: url("../../assets/images/count_card/last_mask.png");
+        background-size: 100% 100%;
+        border: 0;
       }
     }
   }
   .balance-card {
     ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
       li {
-        padding: 23px 16px 23px 16px;
-        background-color: white;
-        border-radius: 4px;
-        margin-top: 12px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        padding: 10px 14px;
+        width: calc(50% - 6px);
+        padding-bottom: 0;
+        border-radius: 8px;
+        margin-top: 14px;
+        overflow: hidden;
         .left-m {
           display: flex;
+          flex-direction: column;
+          .coin-msg {
+            display: flex;
+          }
         }
         img {
-          width: 52px;
-          height: 52px;
-          margin-right: 16px;
+          width: 45px;
+          height: 45px;
+          margin-right: 6px;
         }
         .balance-inner {
           text-align: left;
+          padding-top: 4px;
           .inner-name {
             display: flex;
             align-items: center;
+            height: 14px;
             p {
-              font-size: 14px;
-              color: #999;
+              font-size: 12px;
+              color: #666;
+              white-space: nowrap;
             }
             .iconfont {
-              font-size: 12px;
-              margin-left: 4px;
+              font-size: 24px;
+              transform: translateY(-1px);
             }
           }
           .inner-count {
-            font-size: 20px;
-            color: #666;
+            font-size: 14px;
+            color: #333;
             font-weight: 500;
-            margin: 8px 0;
+            margin-top: 8px;
           }
-          .card-oper {
-            display: flex;
-            align-items: center;
-            .address-detail {
-              margin-left: 12px;
-            }
-          }
+
           .coin-detail {
             font-size: 12px;
             color: #999;
@@ -228,45 +277,44 @@
             }
           }
         }
-        .oper-btn {
-          height: 30px;
+        .card-oper {
           display: flex;
-          button {
-            width: 76px;
-            height: 30px;
-            outline: none;
-            border: 1px solid #eee;
-            background-color: #f8f8f8;
-            font-size: 14px;
-            color: #666;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: nowrap;
+          margin-top: 10px;
+          color: #666;
+          .iconfont {
+            font-size: 12px;
+            margin-left: 3px;
           }
+        }
+        .oper-btn {
+          height: 26px;
+          width: calc(100% + 28px);
+          transform: translateX(-14px);
+          background-color: rgba(0, 0, 0, 0);
+          text-align: center;
+          line-height: 26px;
+          margin-top: 8px;
+          font-weight: 500;
         }
       }
     }
   }
   .charts-card {
-    padding: 12px 16px;
     background-color: white;
     border-radius: 4px;
-    margin-top: 12px;
+    margin-top: 16px;
     .charts-title-msg {
       display: flex;
       justify-content: space-between;
-      flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
       .msg-name {
         font-size: 16px;
-        color: #304888;
+        color: #333;
         font-weight: 500;
-      }
-      .msg-name::before {
-        content: "";
-        display: inline-block;
-        width: 2px;
-        height: 10px;
-        background-color: #304888;
-        margin-right: 6px;
-        border-radius: 1px;
+        white-space: nowrap;
       }
       .oper-box {
         display: flex;
@@ -274,13 +322,12 @@
         justify-content: flex-end;
         width: 100%;
         font-size: 12px;
-        margin-top: 16px;
         .select-date {
           padding: 5px;
-          border: 1px solid #eee;
-          border-radius: 4px;
+          border: 1px solid rgba(91, 57, 252, 0.3);
+          border-radius: 14px;
           margin-right: 8px;
-          height: 22px;
+          height: 24px;
           display: flex;
           p {
             font-size: 12px;
@@ -293,7 +340,7 @@
             margin: 0 6px;
           }
           .date-text {
-            color: #666;
+            color: #5F3EFC;
             font-weight: 500;
           }
           .icon-rili {
@@ -306,26 +353,39 @@
         .other-padding {
           padding: 5px 7px;
         }
-        .down-charts {
-          margin-left: 8px;
-          margin-right: 0;
-          background-color: #f0f3ff;
-          .iconfont {
-            color: #4266ff;
-          }
-          border: 1px solid rgba(66, 102, 255, 0.24);
-        }
         .select-coin {
           display: flex;
           align-items: center;
           padding: 0 8px;
-          border: 1px solid #eee;
-          border-radius: 4px;
-          height: 22px;
-          color: #666;
+          border: 1px solid rgba(91, 57, 252, 0.3);
+          border-radius: 14px;
+          height: 24px;
+          color: #5F3EFC;
           p {
             font-size: 10px;
           }
+        }
+      }
+    }
+    .charts-parent {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #e5dfff;
+      margin-top: 12px;
+      padding-top: 0;
+      position: relative;
+      .down-charts {
+        position: absolute;
+        width: 40px;
+        height: 30px;
+        background: url("../../assets/images/down_bg.png");
+        background-size: 100% 100%;
+        top: 0;
+        right: 0;
+        padding-left: 10px;
+        padding-top: 2px;
+        .iconfont {
+          color: #5f3efc;
         }
       }
     }

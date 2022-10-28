@@ -3,22 +3,28 @@
   height: 100vh;
   background: url("../../assets/images/login_bg.png");
   background-size: 100% 100%;
-  padding: 80px 22px;
+  padding: 0 20px;
   overflow: hidden;
-  max-width:750px;
+  max-width: 750px;
   margin: 0 auto;
+  padding-top: 160px;
   .logo-box {
     display: flex;
     align-items: center;
+    flex-direction: column;
     img {
-      width: 84px;
-      height: 34px;
-      margin-right: 8px;
+      width: 100px;
+      height: 24px;
     }
     p {
-      font-size: 14px;
-      color: rgba(255, 255, 255, 0.7);
-      transform: translateY(2px);
+      font-size: 12px;
+      color: white;
+      margin-top: 8px;
+    }
+  }
+  .login-text-img {
+    img {
+      width: 50px;
     }
   }
   .view-name {
@@ -34,14 +40,14 @@
     }
   }
   .input-box {
-    margin-top: 42px;
+    margin-top: 24px;
     width: 100%;
-    padding: 18px 16px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(1px);
+    padding: 20px;
+    background: rgba(175, 135, 255, 0.08);
+    backdrop-filter: blur(2px);
     border-radius: 10px;
     .inp-box {
-      margin-bottom: 12px;
+      margin-bottom: 18px;
       .inp-label {
         font-size: 14px;
         color: white;
@@ -50,14 +56,15 @@
       .inp-inner {
         height: 46px;
         width: 100%;
-        border-radius: 4px;
+        border-radius: 24px;
         display: flex;
         justify-content: space-between;
-        border: 1px solid rgba(248, 248, 248, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.12);
         padding: 0 12px;
         align-items: center;
+        background-color: rgba(242, 242, 242, 0.06);
         .iconfont {
-          color: white;
+          color: #7b5db3;
           font-size: 16px;
           margin-right: 4px;
         }
@@ -77,24 +84,56 @@
           max-width: 140px;
         }
         input::placeholder {
-          color: rgba(255, 255, 255, 0.5);
+          color: rgba(255, 255, 255, 0.6);
         }
         .send-code {
-          padding: 8px 10px;
           font-size: 12px;
-          color: rgba(255, 255, 255, 0.6);
-          background-color: rgba(216, 216, 216, 0.08);
+          color: #d4c6ff;
           border-radius: 4px;
           white-space: nowrap;
+          display: flex;
+          align-items: center;
+        }
+        .send-code::before {
+          content: "";
+          display: inline-block;
+          width: 1px;
+          height: 18px;
+          background-color: #623ea0;
+          margin-right: 8px;
         }
       }
     }
+    .inp-box:first-child {
+      .inp-inner {
+        .iconfont {
+          transform: translateY(1px);
+        }
+      }
+    }
+    .oper-btn {
+      margin-top: 30px;
+      button {
+        border-radius: 24px;
+        font-size: 14px;
+        font-weight: 500;
+        color: white;
+      }
+      .default-btn {
+        background-color: rgba(0, 0, 0, 0);
+        font-size: 14px;
+        color: #7A40D9;
+        border: 1px solid #6d29dc;
+        margin-top: 12px;
+      }
+    }
     .forget-pass {
-      margin-top: 14px;
-      text-align: right;
+      margin-top: 10px;
+      text-align: center;
       font-size: 12px;
-      color: #6e7eff;
+      color: #f2f2f2;
       margin-bottom: 12px;
+      text-decoration: underline;
     }
   }
 }

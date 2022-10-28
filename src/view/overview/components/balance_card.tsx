@@ -16,6 +16,9 @@ interface Balance {
     count: number,
     detail: Inner[],
     btn: string,
+    bg_color: string,
+    btn_color:string,
+    btn_text_color:string,
 }
 
 export interface Inner {
@@ -24,11 +27,11 @@ export interface Inner {
     address: string
 }
 
-const source = [
+const source: Balance[] = [
     {
         icon: require('../../../assets/images/balance_card/card_1.png'),
         uint: 'U',
-        title: '可代付',
+        title: '代付',
         count: 0,
         btn: 'deposit',
         detail: [
@@ -37,7 +40,10 @@ const source = [
                 amount: 0,
                 address: ''
             }
-        ]
+        ],
+        bg_color: '#EDFFF2',
+        btn_color:'#D8FDE2',
+        btn_text_color:'#3EBB5E'
     },
     {
         icon: require('../../../assets/images/balance_card/card_2.png'),
@@ -52,12 +58,15 @@ const source = [
                 amount: 0,
                 address: ''
             }
-        ]
+        ],
+        bg_color: '#F6F6FF',
+        btn_color:'#E7E7FF',
+        btn_text_color:'#795DFF'
     },
     {
         icon: require('../../../assets/images/balance_card/card_3.png'),
         uint: 'U',
-        title: '可提现',
+        title: '提现',
         count: 0,
         btn: 'withdraw',
         detail: [
@@ -66,7 +75,10 @@ const source = [
                 amount: 0,
                 address: ''
             }
-        ]
+        ],
+        bg_color: '#FFFAF6',
+        btn_color:'#FFF1E6',
+        btn_text_color:'#E9873E'
     },
     {
         icon: require('../../../assets/images/balance_card/card_4.png'),
@@ -86,7 +98,10 @@ const source = [
                 amount: 0,
                 address: ''
             }
-        ]
+        ],
+        bg_color: '#FFF8F9',
+        btn_color:'#FFE9EC',
+        btn_text_color:'#FA3E49'
     },
 ]
 
@@ -99,7 +114,7 @@ const BalanceCard = (): ReactElement<ReactNode> => {
         }
     }, []);
     const walletViewService = async () => {
-        const { merchant_id,account } = state;
+        const { merchant_id, account } = state;
         const reuslt = await WalletViewApi({
             mch_id: merchant_id || JSON.parse(account || '{}')?.merchantInfo.mch_id
         });
@@ -130,7 +145,7 @@ const BalanceCard = (): ReactElement<ReactNode> => {
     };
     useEffect(() => {
         walletViewService();
-    }, [state.merchant_id,state.reload])//eslint-disable-line
+    }, [state.merchant_id, state.reload])//eslint-disable-line
     //地址展示弹框
     const [copyAddressBox, setCopyAddressBox] = useState<boolean>(false);
     const [addressList, setAddressList] = useState<{ coin: string, address: string }[]>([]);
@@ -158,56 +173,58 @@ const BalanceCard = (): ReactElement<ReactNode> => {
                 {
                     list.map((item: Balance, index: number): ReactElement => {
                         return (
-                            <li key={index}>
+                            <li key={index} style={{ background: item.bg_color }}>
                                 <div className='left-m'>
-                                    <img src={item.icon} alt="" />
-                                    <div className='balance-inner'>
-                                        <div className='inner-name'>
-                                            <p>{item.title}</p>
-                                            {item.tootip && <Popover
-                                                content={<p className='tooltip-mine'>{item.tootip}</p>}
-                                                trigger='click'
-                                                placement='top'
-                                            >
-                                                <p className='iconfont icon-question-2beifen'></p>
-                                            </Popover>}
-                                        </div>
-                                        <p className='inner-count'>{Number(item.count).toFixed(4)}&nbsp;{item.uint}</p>
-                                        <div className='card-oper'>
-                                            <Popover
-                                                content={<PopBalance list={item.detail} />}
-                                                trigger='click'
-                                                placement='bottom'
-                                            >
-                                                <p className='coin-detail'>
-                                                    币种明细
-                                                    <span className='iconfont icon-xialajiantouxiaobeifen'></span>
-                                                </p>
-                                            </Popover>
-                                            {
-                                                item.btn === 'deposit' && <p className='coin-detail address-detail' onClick={() => {
-                                                    const { detail } = item;
-                                                    const address: ({ coin: string, address: string })[] = [];
-                                                    detail.forEach((e: Inner) => {
-                                                        address.push({
-                                                            coin: e.coin,
-                                                            address: e.address
-                                                        });
-                                                    });
-                                                    setAddressList([...address]);
-                                                    setCopyAddressBox(true);
-                                                }}>
-                                                    地址管理
-                                                    <span className='iconfont icon-xialajiantouxiaobeifen'></span>
-                                                </p>
-                                            }
+                                    <div className='coin-msg'>
+                                        <img src={item.icon} alt="" />
+                                        <div className='balance-inner'>
+                                            <div className='inner-name'>
+                                                <p>{item.title}</p>
+                                                {item.tootip && <Popover
+                                                    content={<p className='tooltip-mine'>{item.tootip}</p>}
+                                                    trigger='click'
+                                                    placement='top'
+                                                >
+                                                    <p className='iconfont icon-wenhao1'></p>
+                                                </Popover>}
+                                            </div>
+                                            <p className='inner-count'>{Number(item.count).toFixed(4)}&nbsp;{item.uint}</p>
                                         </div>
                                     </div>
+                                    <div className='card-oper'>
+                                        <Popover
+                                            content={<PopBalance list={item.detail} />}
+                                            trigger='click'
+                                            placement='bottom'
+                                        >
+                                            <p className='coin-detail'>
+                                                币种明细
+                                                <span className='iconfont icon-a-xialajiantouxiaobeifen3'></span>
+                                            </p>
+                                        </Popover>
+                                        {
+                                            item.btn === 'deposit' && <p className='coin-detail address-detail' onClick={() => {
+                                                const { detail } = item;
+                                                const address: ({ coin: string, address: string })[] = [];
+                                                detail.forEach((e: Inner) => {
+                                                    address.push({
+                                                        coin: e.coin,
+                                                        address: e.address
+                                                    });
+                                                });
+                                                setAddressList([...address]);
+                                                setCopyAddressBox(true);
+                                            }}>
+                                                地址管理
+                                                <span className='iconfont icon-a-xialajiantouxiaobeifen3'></span>
+                                            </p>
+                                        }
+                                    </div>
                                 </div>
-                                <div className='oper-btn'>
-                                    <button color='default' onClick={() => {
-                                        Toast.show('移动站功能建设中，如需使用此功能请移步至PC站')
-                                    }}>{item.btn === 'deposit' ? '充值' : '提现'}</button>
+                                <div className='oper-btn' style={{background:item.btn_color}} onClick={() => {
+                                    Toast.show('移动站功能建设中，如需使用此功能请移步至PC站')
+                                }}>
+                                    <p style={{color:item.btn_text_color}}>去{item.btn === 'deposit' ? '充值' : '提现'}</p>
                                 </div>
                             </li>
                         )

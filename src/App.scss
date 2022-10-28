@@ -3,6 +3,7 @@
   max-width: 750px;
   height: calc(100vh - 48px);
   margin: 0 auto;
+  padding-top: 82px;
   .private-route {
     display: flex;
     height: 100%;
@@ -46,4 +47,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+:root:root{
+  --adm-color-primary: #5C26F7;
 }

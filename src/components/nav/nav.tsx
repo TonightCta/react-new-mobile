@@ -1,9 +1,15 @@
 
 import { ReactElement, ReactNode, useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { TabBar } from 'antd-mobile'
 import './index.scss'
 import { IBPayMobile } from '../../route/router';
+
+
+interface Tab {
+    key: string,
+    title: string,
+    icon: ReactNode
+}
 
 const NavBottom = (): ReactElement<ReactNode> => {
     const navigate = useNavigate();
@@ -27,7 +33,7 @@ const NavBottom = (): ReactElement<ReactNode> => {
                 setActiveRouter('home')
         }
     }, [])
-    const tabs = !!admin ? [
+    const tabs: Tab[] = !!admin ? [
         {
             key: 'home',
             title: '概览',
@@ -55,35 +61,50 @@ const NavBottom = (): ReactElement<ReactNode> => {
             icon: <span className='iconfont icon-merchant'></span>,
         }
     ];
+    const switchRoute = (_url: string) => {
+        switch (_url) {
+            case 'home':
+                navigate('/');
+                setActiveRouter('home')
+                break;
+            case 'fee':
+                navigate('/fee');
+                setActiveRouter('fee')
+                break;
+            case 'todo':
+                navigate('/merchant');
+                setActiveRouter('todo');
+                break;
+            default:
+                setActiveRouter('home')
+                navigate('/')
+        }
+    }
     return (
         <div className='nav-bottom'>
-            <TabBar onChange={(e) => {
-                switch (e) {
-                    case 'home':
-                        navigate('/');
-                        setActiveRouter('home')
-                        break;
-                    case 'fee':
-                        navigate('/fee');
-                        setActiveRouter('fee')
-                        break;
-                    case 'todo':
-                        navigate('/merchant');
-                        setActiveRouter('todo');
-                        break;
-                    default:
-                        setActiveRouter('home')
-                        navigate('/')
-                }
-            }} activeKey={activeRouter}>
+            <p></p>
+            <ul>
                 {
-                    tabs.map((item): ReactElement => {
+                    tabs.map((item: Tab, index: number): ReactElement => {
                         return (
-                            <TabBar.Item key={item.key} icon={item.icon} title={item.title}></TabBar.Item>
+                            <li key={index} className={`${activeRouter === item.key ? 'active-nav' : ''}`} onClick={() => {
+                                switchRoute(item.key)
+                            }}>
+                                <p>
+                                    {item.title}
+                                </p>
+                                <p className='active-mask'></p>
+                            </li>
                         )
                     })
                 }
-            </TabBar>
+            </ul>
+            <div className='login-out' onClick={() => {
+                localStorage.clear();
+                navigate('/login')
+            }}>
+                <p className='iconfont icon-tuichu-6'></p>
+            </div>
         </div>
     )
 };

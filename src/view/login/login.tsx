@@ -101,9 +101,9 @@ const LoginView = (): ReactElement<ReactNode> => {
         localStorage.setItem('token_ib_mobile', `${data.token_type} ${data.access_token}`)
         const info = await MerchantInfoApi({});
         dispatch({
-            type:Type.SET_MERCHANT,
-            payload:{
-                merchant_id:info.data.merchantInfo.mch_id
+            type: Type.SET_MERCHANT,
+            payload: {
+                merchant_id: info.data.merchantInfo.mch_id
             }
         })
         dispatch({
@@ -180,16 +180,16 @@ const LoginView = (): ReactElement<ReactNode> => {
     }
     return (
         <div className="login-view">
-            <div className="logo-box">
-                <img src={require('../../assets/images/logo.png')} alt="" />
-                <p>商家平台</p>
+            <div className={`logo-box ${indexType === 1 ? 'login-text-img' : ''}`}>
+                <img src={require(`../../assets/images/${indexType === 1 ? 'login_text' : 'forget_text'}.png`)} alt="" />
+                <p>HLWZC.COM</p>
             </div>
-            <p className="view-name" onClick={() => {
+            {/* <p className="view-name" onClick={() => {
                 setIndexType(1)
             }}>
                 {indexType === 2 && <span><LeftOutline fontSize={16} color="rgba(255,255,255,.6)" /></span>}
                 {indexType === 1 ? '登录' : '忘记密码'}
-            </p>
+            </p> */}
             {indexType === 1
                 ?
                 //登录
@@ -197,7 +197,7 @@ const LoginView = (): ReactElement<ReactNode> => {
                     <div className="inp-box">
                         <p className="inp-label">邮箱</p>
                         <div className="inp-inner">
-                            <div className="iconfont icon-duanxinyouxiang"></div>
+                            <div className="iconfont icon-youxiang"></div>
                             <input type="text" placeholder="请输入您的邮箱" value={inpLogin.email} onChange={(e) => {
                                 setInpLogin({
                                     ...inpLogin,
@@ -215,7 +215,7 @@ const LoginView = (): ReactElement<ReactNode> => {
                     <div className="inp-box">
                         <p className="inp-label">登录密码</p>
                         <div className="inp-inner">
-                            <div className="iconfont icon-weibiaoti--"></div>
+                            <div className="iconfont icon-mima"></div>
                             <input type={viewType} value={inpLogin.password} onChange={(e) => {
                                 setInpLogin({
                                     ...inpLogin,
@@ -230,7 +230,7 @@ const LoginView = (): ReactElement<ReactNode> => {
                     <div className="inp-box">
                         <p className="inp-label">谷歌验证码</p>
                         <div className="inp-inner">
-                            <div className="iconfont icon-auth-icon"></div>
+                            <div className="iconfont icon-gugeyanzhengma"></div>
                             <input type="number" placeholder="输入谷歌验证码" value={inpLogin.auth_code} onChange={(e) => {
                                 setInpLogin({
                                     ...inpLogin,
@@ -239,21 +239,21 @@ const LoginView = (): ReactElement<ReactNode> => {
                             }} autoComplete="new-password" />
                         </div>
                     </div>
-                    <p className="forget-pass" onClick={() => {
-                        setIndexType(2)
-                    }}>忘记密码？</p>
                     <div className="oper-btn">
                         <Button color="primary" loading={waitLogin} block onClick={() => {
                             LoginService()
                         }}>登录</Button>
                     </div>
+                    <p className="forget-pass" onClick={() => {
+                        setIndexType(2)
+                    }}>忘记密码？</p>
                 </div>
                 // 忘记密码
                 : <div className="input-box">
                     <div className="inp-box">
                         <p className="inp-label">邮箱</p>
                         <div className="inp-inner">
-                            <div className="iconfont icon-duanxinyouxiang"></div>
+                            <div className="iconfont icon-youxiang"></div>
                             <input type="text" placeholder="请输入您的邮箱" value={findMsg.email} onChange={(e) => {
                                 setFindMsg({
                                     ...findMsg,
@@ -272,7 +272,7 @@ const LoginView = (): ReactElement<ReactNode> => {
                         <p className="inp-label">验证码</p>
                         <div className="inp-inner">
                             <div style={{ display: 'flex', alignItems: 'center' }}>
-                                <div className="iconfont icon-yanzhengma-2"></div>
+                                <div className="iconfont icon-yanzhengma"></div>
                                 <input type="number" className="other-inp-width" placeholder="请输入邮箱验证码" value={findMsg.code} onChange={(e) => {
                                     setFindMsg({
                                         ...findMsg,
@@ -290,13 +290,13 @@ const LoginView = (): ReactElement<ReactNode> => {
                     <div className="inp-box">
                         <p className="inp-label">新密码</p>
                         <div className="inp-inner">
-                            <div className="iconfont icon-weibiaoti--"></div>
+                            <div className="iconfont icon-mima"></div>
                             <input type={viewPass.new} placeholder="请输入新密码" value={findMsg.new_pass} onChange={(e) => {
                                 setFindMsg({
                                     ...findMsg,
                                     new_pass: e.target.value
                                 })
-                            }} autoComplete="new-password" />
+                            }}  autoComplete="new-password" />
                             <div className={`iconfont other-icon ${viewPass.new === 'password' ? 'icon-yanjing-guanbeifen' : 'icon-yanjing-guan'}`} onClick={() => {
                                 setViewPass({
                                     ...viewPass,
@@ -308,7 +308,7 @@ const LoginView = (): ReactElement<ReactNode> => {
                     <div className="inp-box">
                         <p className="inp-label">确认密码</p>
                         <div className="inp-inner">
-                            <div className="iconfont icon-weibiaoti--"></div>
+                            <div className="iconfont icon-gugeyanzhengma"></div>
                             <input type={viewPass.repeat} placeholder="请再次输入新密码" value={findMsg.repeat_pass} onChange={(e) => {
                                 setFindMsg({
                                     ...findMsg,
@@ -325,6 +325,9 @@ const LoginView = (): ReactElement<ReactNode> => {
                     </div>
                     <div className="oper-btn">
                         <Button color="primary" loading={waitLogin} block onClick={() => { UpdatePassService() }}>确认</Button>
+                        <Button color="default" block className="default-btn" onClick={() => {
+                            setIndexType(1)
+                        }}>返回</Button>
                     </div>
                 </div>
             }

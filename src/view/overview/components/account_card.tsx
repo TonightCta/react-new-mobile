@@ -1,6 +1,5 @@
 
 import { ReactElement, ReactNode, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { IBPayMobile } from '../../../route/router';
 import { useEffect } from 'react';
@@ -10,6 +9,7 @@ import { Button, Popover, Toast } from 'antd-mobile';
 import OperAssets from './oper_assets';
 import { CheckBalanceApi, CheckProfitApi } from '../../../request/api';
 import { Inner } from './balance_card';
+import CountCard from './count_card';
 
 interface Account {
     name: string,
@@ -36,7 +36,6 @@ export interface Balance {
 
 
 const AccountCard = (): ReactElement<ReactNode> => {
-    const navigate = useNavigate();
     const { state, dispatch } = useContext(IBPayMobile);
     const [selectMerchantBox, setSelectMerchantBox] = useState<boolean>(false);
     const admin = JSON.parse(state.account || '{}')?.merchantInfo.is_admin;
@@ -85,37 +84,36 @@ const AccountCard = (): ReactElement<ReactNode> => {
                     }
                 </ul>
                 {
-                    deposit_fee?.length  === 0 && <p className='no-data'>暂无数据</p>
+                    deposit_fee?.length === 0 && <p className='no-data'>暂无数据</p>
                 }
             </div>
         )
     };
     return (
         <div className='account-card'>
-            <div className='sign-out' onClick={() => {
-                localStorage.clear();
-                navigate('/login')
-            }}>
-                <span className='iconfont icon-tuichu-2'></span>
-                退出
-            </div>
-            <div className='ib-avatar'>
-                <img src={require('../../../assets/images/ib_avatar.png')} alt="" />
-            </div>
-            <p className='account-name' onClick={admin ? () => {
+            <div className='account-name-avtar' onClick={admin ? () => {
                 setSelectMerchantBox(true)
-            } : () => { }}>{account.name}
-                {admin && <img src={require('../../../assets/images/down_icon.png')} alt="" />}
-            </p>
-            {
+            } : () => { }}>
+                <div className='ib-avatar'>
+                    <div className='avatar-box'>
+                        <img src={require('../../../assets/images/a.png')} alt="" />
+                    </div>
+                    <p>{account.name}</p>
+                </div>
+                <div className='select-merchant-icon'>
+                    {admin && <p className='iconfont icon-xiala'></p>}
+                </div>
+            </div>
+            {/* {
                 account.ga != undefined && <div className={`auth-status ${account.ga === 1 && 'has-auth'}`}>
                     {account.ga === 0 ? '未' : '已'}绑定
                     {account.ga === 0 && <img src={require('../../../assets/images/right_arrow.png')} alt="" />}
                 </div>
-            }
+            } */}
             {/* 账户操作 */}
             {
                 admin && <div className='account-oper'>
+                    <div color='primary' className={`auth-status ${account.ga === 1 && 'has-auth'}`}> {account.ga === 0 ? '未' : '已'}绑定</div>
                     <Button color='primary' size='small' onClick={async () => {
                         Toast.show({
                             content: '查询中...',
@@ -169,28 +167,29 @@ const AccountCard = (): ReactElement<ReactNode> => {
                     }}>提取余额</Button>
 
                     <Popover
-                        content={<PopBalance/>}
+                        content={<PopBalance />}
                         trigger='click'
                         placement='bottom'
                     >
                         <Button color='primary' size='small'>
                             充值收益
-                            <span className='iconfont icon-shangxia'></span>
+                            {/* <span className='iconfont icon-bizhongmingxi'></span> */}
                         </Button>
                     </Popover>
                 </div>
             }
-            {
-                admin && <p className='oper-line'></p>
-            }
             <div className='login-msg'>
                 <div className='msg-public'>
-                    <p>上次登录时间</p>
-                    <p>{account.last_login_time}</p>
+                    <p>商户号</p>
+                    <p>{account.mch_id}</p>
                 </div>
                 <div className='msg-public'>
                     <p>邮箱</p>
                     <p>{account.email}</p>
+                </div>
+                <div className='msg-public'>
+                    <p>上次登录时间</p>
+                    <p>{account.last_login_time}</p>
                 </div>
             </div>
             <SelectMerchant value={selectMerchantBox} resetValue={(value: boolean) => {
@@ -215,6 +214,8 @@ const AccountCard = (): ReactElement<ReactNode> => {
             <OperAssets value={visible} profit={settleMsg} balance={balanceMsg} resetModal={(val: boolean): void => {
                 setVisible(val);
             }} type={assetType} />
+            {/* 流水信息 */}
+            {admin && <CountCard />}
         </div>
     )
 };

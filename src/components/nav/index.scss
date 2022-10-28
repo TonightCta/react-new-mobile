@@ -1,14 +1,65 @@
 .nav-bottom {
-  height: 48px;
   background-color: white;
   width: 100%;
   position: fixed;
   left: 50%;
   margin-left: -50%;
-  bottom: 0;
-  border-top: 1px solid #f8f8f8;
-  .adm-tab-bar-item-active{
-    color: #4266FF;
-    font-weight: bold;
+  top: 0;
+  padding: 20px 12px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .login-out {
+    width: 28px;
+    height: 42px;
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f3f1ff;
+    .iconfont {
+      font-size: 12px;
+      color: #5b39fc;
+    }
+  }
+  ul {
+    height: 42px;
+    padding: 3px;
+    background-color: rgba(103, 71, 253, 0.06);
+    border-radius: 21px;
+    display: flex;
+    li {
+      width: 88px;
+      height: 100%;
+      text-align: center;
+      transition: 0.3s all;
+      position: relative;
+      p {
+        line-height: 36px;
+        font-size: 15px;
+        color: #666;
+      }
+      .active-mask {
+        position: absolute;
+        width: 0px;
+        height: 0px;
+        border: 6px solid rgba(0,0,0,0);
+        bottom: -12px;
+        left: 50%;
+        margin-left: -6px;
+        transition: .3s all;
+      }
+    }
+    .active-nav {
+      background-color: #6747fd;
+      border-radius: 21px;
+      p {
+        color: white;
+      }
+
+      .active-mask{
+        border-top-color: #6747fd;
+      }
+    }
   }
 }

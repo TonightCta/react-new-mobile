@@ -17,19 +17,18 @@ interface Card {
     count: number,
     background: string,
     more: Inner[],
-    more_icon?: string,
     uint?: string,
-    bg_icon:string,
+    bg_icon: string,
 }
 
 const source = [
     {
         icon: 'icon-a-bianzu50',
-        title: '总商户',
+        title: '商户数',
         count: 0,
         background: 'linear-gradient(47deg, #FF98B7 0%, #FF7398 100%)',
         more: [],
-        bg_icon:require('../../../assets/images/count_card/card_1.png')
+        bg_icon: require('../../../assets/images/count_card/card_1.png')
     },
     {
         icon: 'icon-a-bianzu9',
@@ -57,8 +56,7 @@ const source = [
             }
         ],
         uint: 'U',
-        more_icon: require('../../../assets/images/count_card/arrow_1.png'),
-        bg_icon:require('../../../assets/images/count_card/card_2.png')
+        bg_icon: require('../../../assets/images/count_card/card_2.png')
     },
     {
         icon: 'icon-a-bianzu501',
@@ -86,8 +84,7 @@ const source = [
             }
         ],
         uint: 'U',
-        more_icon: require('../../../assets/images/count_card/arrow_2.png'),
-        bg_icon:require('../../../assets/images/count_card/card_3.png')
+        bg_icon: require('../../../assets/images/count_card/card_3.png')
     },
     {
         icon: 'icon-a-bianzu51',
@@ -124,8 +121,7 @@ const source = [
             },
         ],
         uint: 'U',
-        more_icon: require('../../../assets/images/count_card/arrow_3.png'),
-        bg_icon:require('../../../assets/images/count_card/card_4.png')
+        bg_icon: require('../../../assets/images/count_card/card_4.png')
     },
     {
         icon: 'icon-a-bianzu511',
@@ -144,8 +140,7 @@ const source = [
             },
         ],
         uint: 'U',
-        more_icon: require('../../../assets/images/count_card/arrow_5.png'),
-        bg_icon:require('../../../assets/images/count_card/card_5.png')
+        bg_icon: require('../../../assets/images/count_card/card_5.png')
     }
 ]
 
@@ -159,7 +154,7 @@ const CountCard = (): ReactElement<ReactNode> => {
     }, []);
     useEffect(() => {
         assetsInfo();
-    },[state.merchant_id])
+    }, [state.merchant_id])
     const assetsInfo = async () => {
         const { merchant_id } = state;
         const result = await MerchantViewApi({
@@ -215,32 +210,36 @@ const CountCard = (): ReactElement<ReactNode> => {
                 {
                     list.map((item: Card, index: number): ReactElement<ReactNode> => {
                         return (
-                            <li key={index} style={{ background: item.background }}>
-                                <div className='item-name'>
-                                    <span className={`iconfont ${item.icon}`}></span>
-                                    {item.title}
-                                    {item.more.length > 0 &&
-                                        <Popover
-                                            content={<PopCon list={item.more} />}
-                                            trigger='click'
-                                            placement='bottom'
-                                        >
-                                            <div className='count-detail'>
-                                                <p>明细</p>
-                                                <img src={item.more_icon} />
-                                            </div>
-                                        </Popover>}
-                                </div>
-                                <div className='item-count'>
-                                    <p className='count-text'>{item.count}&nbsp;{item.uint && item.uint}</p>
-                                </div>
+                            <li key={index}>
                                 <div className='item-bg-icon'>
                                     <img src={item.bg_icon} alt="" />
+                                </div>
+                                <div>
+                                    <div className='item-name'>
+                                        {item.title}
+                                        {item.more.length > 0 &&
+                                            <Popover
+                                                content={<PopCon list={item.more} />}
+                                                trigger='click'
+                                                placement='bottom'
+                                            >
+                                                <div className='count-detail'>
+                                                    <p>明细</p>
+                                                    <p className='detail-icon'>
+                                                        <span className='iconfont icon-bizhongmingxi'></span>
+                                                    </p>
+                                                </div>
+                                            </Popover>}
+                                    </div>
+                                    <div className='item-count'>
+                                        <p className='count-text'>{item.count}<span>{item.uint && item.uint}</span></p>
+                                    </div>
                                 </div>
                             </li>
                         )
                     })
                 }
+                <li className='img-mask'></li>
             </ul>
         </div>
     )

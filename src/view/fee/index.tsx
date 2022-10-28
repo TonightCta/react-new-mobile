@@ -7,7 +7,7 @@ import './index.scss'
 const FeeIndex = (): ReactElement<ReactNode> => {
     return (
         <div className='fee-index merchant-view'>
-            <FeeNav/>
+            {/* <FeeNav/> */}
             <div className='tabs-mine'>
                 <FeeList />
             </div>

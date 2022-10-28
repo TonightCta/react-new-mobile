@@ -36,13 +36,6 @@ const RouteConfig = (): ReactElement<ReactNode> => {
                     <Route path='*' element={<Suspense fallback={<RouteLoading />}>
                         <View.NotFoundView />
                     </Suspense>} />
-                    {/* Unknow */}
-                    {/* <Route path='/' element={<Suspense fallback={<RouteLoading />}>
-                        <View.UnKnow />
-                    </Suspense>} />
-                    <Route path='/market-detail' element={<Suspense fallback={<RouteLoading />}>
-                        <View.MarketDetail />
-                    </Suspense>} /> */}
                 </Routes>
             </IBPayMobile.Provider>
         </HashRouter>
