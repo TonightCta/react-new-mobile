@@ -169,7 +169,7 @@ const WithdrawList = (): ReactElement<ReactNode> => {
                     <li>
                         <p>商户名称</p>
                         <p>{detailMsg.current.merchant.name}</p>
-                        <p className='iconfont icon-a-fuzhibeifen2' onClick={() => {
+                        <p className='iconfont icon-a-fuzhi2' onClick={() => {
                             copy(detailMsg.current.merchant.name);
                             Toast.show('复制成功')
                         }}></p>
@@ -182,7 +182,7 @@ const WithdrawList = (): ReactElement<ReactNode> => {
                     <li>
                         <p>提币地址</p>
                         <p>{detailMsg.current.to}</p>
-                        <p className='iconfont icon-a-fuzhibeifen2' onClick={() => {
+                        <p className='iconfont icon-a-fuzhi2' onClick={() => {
                             copy(detailMsg.current.to);
                             Toast.show('复制成功')
                         }}></p>
@@ -210,7 +210,7 @@ const WithdrawList = (): ReactElement<ReactNode> => {
                     <li>
                         <p>提币金额</p>
                         <p className='strong-text'>{detailMsg.current.amount}</p>
-                        <p className='iconfont icon-a-fuzhibeifen2' onClick={() => {
+                        <p className='iconfont icon-a-fuzhi2' onClick={() => {
                             copy('test');
                             Toast.show('复制成功')
                         }}></p>
@@ -254,7 +254,7 @@ const WithdrawList = (): ReactElement<ReactNode> => {
             state: filter.status ? filter.status : '',
             merchant_id: filter.merchant ? filter.merchant : '',
             limit: 10,
-            isMerchant:1,
+            isMerchant: 1,
             page: _page ? _page : page
         }
         const result = await WithdrawListApi(params);
@@ -278,6 +278,7 @@ const WithdrawList = (): ReactElement<ReactNode> => {
     }
     return (
         <div className='withdraw-list list-public'>
+            
             <PullToRefresh
                 onRefresh={async () => {
                     await sleep(1000);
@@ -299,44 +300,47 @@ const WithdrawList = (): ReactElement<ReactNode> => {
                                             <div className='img-text'>
                                                 <img src={item.logo} alt="" />
                                                 <div className='msg-text'>
-                                                    <p>{item.coin}</p>
+                                                    <p>{item.merchant.name}<span>{item.coin}</span></p>
                                                     <p>{item.created_at}</p>
                                                 </div>
                                             </div>
-                                            <div className='fee-msg'>
+                                            {/* <div className='fee-msg'>
                                                 <p>手续费</p>
                                                 <p>{Number(item.fee).toFixed(2)}</p>
-                                            </div>
+                                            </div> */}
                                         </div>
                                         <div className='pay-msg'>
-                                            <div className='msg-public'>
-                                                <p>商户名称</p>
-                                                <p>
-                                                    {item.merchant.name}
-                                                    <span className='iconfont icon-a-fuzhibeifen2' onClick={() => {
-                                                        copy(item.merchant.name)
-                                                        Toast.show('复制成功')
-                                                    }}></span>
-                                                </p>
-                                            </div>
-                                            <div className='msg-public'>
-                                                <p>提币地址</p>
-                                                <p>
-                                                    {item.to}
-
-                                                </p>
-                                                <p>
-                                                    <span className='iconfont icon-a-fuzhibeifen2' onClick={() => {
-                                                        copy(item.to)
-                                                        Toast.show('复制成功')
-                                                    }}></span>
-                                                </p>
+                                            <div className='msg-public need-hidden'>
+                                                <div className='need-inner'>
+                                                    <p>提币地址</p>
+                                                    <p>
+                                                        {item.to}
+                                                    </p>
+                                                    <p>
+                                                        <span className='iconfont icon-a-fuzhi2' onClick={() => {
+                                                            copy(item.to)
+                                                            Toast.show('复制成功')
+                                                        }}></span>
+                                                    </p>
+                                                </div>
+                                                <div className='need-inner'>
+                                                    <p>手续费</p>
+                                                    <p>
+                                                        {Number(item.fee).toFixed(2)}
+                                                    </p>
+                                                    <p>
+                                                        <span className='iconfont icon-a-fuzhi2' onClick={() => {
+                                                            copy(String(item.fee))
+                                                            Toast.show('复制成功')
+                                                        }}></span>
+                                                    </p>
+                                                </div>
                                             </div>
                                             <div className='msg-public'>
                                                 <p>提币金额</p>
                                                 <p>
                                                     <span className='strong-text'>{Number(item.amount).toFixed(4)}</span>
-                                                    <span className='iconfont icon-a-fuzhibeifen2' onClick={() => {
+                                                    <span className='iconfont icon-a-fuzhi2' onClick={() => {
                                                         copy(String(item.amount));
                                                         Toast.show('复制成功')
                                                     }}></span>

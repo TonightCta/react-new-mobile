@@ -1,7 +1,16 @@
 @import "../merchant/index.scss";
 .fee-index {
-  padding: 12px;
-  padding-top: 60px !important;
+  .fee-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 12px;
+    .nav-name {
+      font-size: 16px;
+      color: #333;
+      font-weight: 500;
+    }
+  }
   .msg-text {
     span {
       font-weight: 400;
@@ -12,14 +21,30 @@
       transform: translateY(-1px);
     }
     .in {
-      color: #0f956d;
+      color: #0f956d!important;
       background: url("../../assets/images/in_bg.png");
       background-size: 100% 100%;
     }
     .out {
-      color: #f38500;
+      color: #f38500!important;
       background: url("../../assets/images/out_bg.png");
       background-size: 100% 100%;
+    }
+  }
+  .fee-msg{
+    transform: translateY(10px);
+  }
+  .pay-msg{
+    border: 0!important;
+    .need-hidden{
+      .need-inner{
+        p:first-child{
+          min-width: 84px!important;
+        }
+      }
+      .need-inner:last-child{
+        margin-top: 8px!important;
+      }
     }
   }
 }
@@ -33,7 +58,7 @@
       border-radius: 4px;
     }
     .in {
-      background-color: rgba(15, 149, 109, 0.12);
+      background-color: rgba(15, 149, 109, 0.06);
       color: #0f956d;
     }
     .out {

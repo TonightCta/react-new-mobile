@@ -1,23 +1,59 @@
 .merchant-view {
-  padding-top: 50px;
-  .merchant-nav {
-    background-color: white;
-    padding: 16px 0;
-    position: fixed;
-    top: 0;
-    z-index: 200;
-    width: 100%;
-    max-width: 750px;
-    left: 50%;
-    margin-left: -50%;
-    p {
-      font-size: 18px;
-      color: #333;
+  // .merchant-nav {
+  //   background-color: white;
+  //   padding: 16px 0;
+  //   top: 0;
+  //   z-index: 200;
+  //   width: 100%;
+  //   max-width: 750px;
+  //   left: 50%;
+  //   margin-left: -50%;
+  //   p {
+  //     font-size: 18px;
+  //     color: #333;
+  //   }
+  // }
+  .tabs-service {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 12px;
+    ul {
+      display: flex;
+      li {
+        font-size: 16px;
+        color: #999;
+        margin-right: 30px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      li::after {
+        content: "";
+        display: none;
+        width: 22px;
+        height: 3px;
+        border-radius: 2px;
+        margin-top: 5px;
+        background: linear-gradient(270deg, #ffffff 0%, #7355fe 100%);
+      }
+      .active-tab {
+        color: #333;
+      }
+      .active-tab::after {
+        display: inline-block;
+      }
     }
+  }
+  .filter-box {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f6f4ff;
+    border-radius: 4px;
     .filter-public {
-      position: absolute;
-      right: 22px;
-      top: 20px;
       .iconfont {
         font-size: 13px;
         color: #666;
@@ -29,7 +65,7 @@
     .adm-tabs-header {
       background-color: white;
       position: fixed;
-      top: 50px;
+      top: 70px;
       width: 100%;
       max-width: 750px;
       left: 50%;
@@ -105,7 +141,7 @@
               .strong-text {
                 font-size: 16px;
                 font-weight: 500;
-                color: #4266ff!important;
+                color: #4266ff !important;
               }
             }
             li:last-child {
@@ -124,11 +160,13 @@
         }
       }
       ul {
+        padding: 12px;
         li {
           padding: 12px;
           background-color: white;
           border-radius: 4px;
           margin-bottom: 12px;
+          box-shadow: 0px 2px 9px 0px rgba(0, 0, 0, 0.08);
           .coin-msg {
             display: flex;
             justify-content: space-between;
@@ -150,6 +188,13 @@
                   font-size: 14px;
                   color: #333;
                   font-weight: 500;
+                  span {
+                    font-size: 12px;
+                    color: #6343fc;
+                    padding: 2px 6px;
+                    background-color: rgba(99, 67, 253, 0.06);
+                    border-radius: 4px;
+                  }
                 }
                 p:last-child {
                   font-size: 12px;
@@ -171,39 +216,68 @@
             }
           }
           .pay-msg {
-            padding: 7px 10px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-            margin-top: 12px;
+            margin-top: 18px;
+            display: flex;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
             .msg-public {
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              margin-bottom: 12px;
+              text-align: left;
               p {
                 font-size: 12px;
-                color: #999;
+                color: #666;
                 white-space: nowrap;
                 .strong-text {
-                  font-size: 16px;
+                  font-size: 18px;
                   font-weight: 500;
-                  color: #4266ff;
+                  color: #6343FC;
                 }
                 .iconfont {
                   color: #666;
                   font-size: 13px;
+                  display: inline-block;
                   margin-left: 8px;
+                  transform: translateY(-1px);
                 }
               }
               p:nth-child(2) {
+                display: inline-block;
                 text-overflow: ellipsis;
                 overflow: hidden;
-                padding-left: 12px;
-                text-align: right;
+                margin-top: 3px;
+              }
+            }
+            .need-hidden {
+              width: 55%;
+              p:nth-child(2){
+                margin-top: 7px;
+                color: #999;
+                width: 90%;
+              }
+              .iconfont{
+                font-size: 12px;
+                display: inline-block;
+                transform: translateY(-2px);
+              }
+              .need-inner{
+                display: flex;
+                width: 100%;
+                p{
+                  margin-top: 0;
+                }
+                p:first-child{
+                  min-width: 48px;
+                  margin-right: 14px;
+                }
+              }
+              .need-inner:last-child{
+                margin-top: 6px;
               }
             }
             .msg-public:last-child {
-              margin-bottom: 0;
+              flex: 1;
+              display: flex;
+              flex-direction: column;
+              align-items: flex-end;
             }
           }
           .oper-box {
@@ -220,11 +294,11 @@
               background-color: rgba(0, 0, 0, 0);
             }
             .reject-btn {
-              border: 1px solid #4266ff;
-              color: #4266ff;
+              border: 1px solid #613FFD;
+              color: #613FFD;
             }
             .primary-btn {
-              background-color: #4266ff;
+              background-color: #613FFD;
               color: white;
             }
             .done-btn {
@@ -239,7 +313,7 @@
       .adm-center-popup-body {
         padding-top: 0;
       }
-      
+
       .adm-dialog-content {
         padding: 20px;
         .hash-content {
@@ -302,15 +376,15 @@
           ul {
             li {
               .withdraw-pending {
-                color: #ff9a00!important;
+                color: #ff9a00 !important;
                 font-weight: 500;
               }
               .withdraw-reject {
-                color: #f0554c!important;
+                color: #f0554c !important;
                 font-weight: 500;
               }
-              .withdraw-done{
-                color: #12BE8B!important;
+              .withdraw-done {
+                color: #12be8b !important;
                 font-weight: 500;
               }
             }

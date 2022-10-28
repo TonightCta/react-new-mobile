@@ -108,7 +108,7 @@ const FeeList = (): ReactElement<ReactNode> => {
                     <li>
                         <p>商户名称</p>
                         <p>{detailMsg.current.mch_name}</p>
-                        <p className='iconfont icon-a-fuzhibeifen2' onClick={() => {
+                        <p className='iconfont icon-a-fuzhi2' onClick={() => {
                             copy(detailMsg.current.mch_name);
                             Toast.show('复制成功')
                         }}></p>
@@ -121,7 +121,7 @@ const FeeList = (): ReactElement<ReactNode> => {
                     <li>
                         <p>转出地址</p>
                         <p>{detailMsg.current.from}</p>
-                        <p className='iconfont icon-a-fuzhibeifen2' onClick={() => {
+                        <p className='iconfont icon-a-fuzhi2' onClick={() => {
                             copy(detailMsg.current.from);
                             Toast.show('复制成功')
                         }}></p>
@@ -129,7 +129,7 @@ const FeeList = (): ReactElement<ReactNode> => {
                     <li>
                         <p>目标地址</p>
                         <p>{detailMsg.current.to}</p>
-                        <p className='iconfont icon-a-fuzhibeifen2' onClick={() => {
+                        <p className='iconfont icon-a-fuzhi2' onClick={() => {
                             copy(detailMsg.current.to);
                             Toast.show('复制成功')
                         }}></p>
@@ -180,7 +180,8 @@ const FeeList = (): ReactElement<ReactNode> => {
                                                 <img src={item.logo} alt="" />
                                                 <div className='msg-text'>
                                                     <p>
-                                                        {item.coin}
+                                                        {item.mch_name}
+                                                        <span>{item.coin}</span>
                                                         <span className={`${item.type == 1 ? 'in' : 'out'}`}>{item.type == 1 ? '利润结算' : '余额提取'}</span>
                                                     </p>
                                                     <p>{item.created_at}</p>
@@ -194,23 +195,19 @@ const FeeList = (): ReactElement<ReactNode> => {
                                             </div>
                                         </div>
                                         <div className='pay-msg'>
-                                            <div className='msg-public'>
-                                                <p>商户名称</p>
-                                                <p>
-                                                    {item.mch_name}
-                                                </p>
-                                            </div>
-                                            <div className='msg-public'>
-                                                <p>目标地址</p>
-                                                <p>
-                                                    {item.to}
-                                                </p>
-                                            </div>
-                                            <div className='msg-public'>
-                                                <p>处理前链上余额</p>
-                                                <p>
-                                                    {Number(item.from_before_balance).toFixed(4)}
-                                                </p>
+                                            <div className='msg-public need-hidden'>
+                                                <div className='need-inner'>
+                                                    <p>目标地址</p>
+                                                    <p>
+                                                        {item.to}
+                                                    </p>
+                                                </div>
+                                                <div className='need-inner'>
+                                                    <p>处理前链上余额</p>
+                                                    <p>
+                                                        {Number(item.from_before_balance).toFixed(4)}
+                                                    </p>
+                                                </div>
                                             </div>
                                             <div className='msg-public'>
                                                 <p>转出数量</p>

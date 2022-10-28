@@ -53,7 +53,7 @@ const FilterWithdraw = (): ReactElement<ReactNode> => {
     const [filterMsg, setFilterMsg] = useState<FilterW>(source);
     return (
         <div className='wihdraw-deposit filter-public'>
-            <p className='iconfont icon-shaixuan' onClick={() => {
+            <p className='iconfont icon-a-H5shaixuan' onClick={() => {
                 setFilterBox(true);
             }}></p>
             {/* 筛选弹框 */}

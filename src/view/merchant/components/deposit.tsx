@@ -17,8 +17,8 @@ interface Deposit {
     to: string,
     amount: number,
     logo: string,
-    id:string,
-    url:string,
+    id: string,
+    url: string,
     merchant: {
         name: string
     }
@@ -57,7 +57,7 @@ const DepositList = (): ReactElement<ReactNode> => {
             state: filter.status ? filter.status : '',
             merchant_id: filter.merchant ? filter.merchant : '',
             limit: 10,
-            isMerchant:1,
+            isMerchant: 1,
             page: _page ? _page : page
         };
         const result = await OrderListApi(params);
@@ -86,8 +86,8 @@ const DepositList = (): ReactElement<ReactNode> => {
         to: '',
         amount: 0,
         logo: '',
-        id:'',
-        url:'',
+        id: '',
+        url: '',
         merchant: {
             name: ''
         }
@@ -107,7 +107,7 @@ const DepositList = (): ReactElement<ReactNode> => {
                     <li>
                         <p>商户名称</p>
                         <p>{detailMsg.current.merchant.name}</p>
-                        <p className='iconfont icon-a-fuzhibeifen2' onClick={() => {
+                        <p className='iconfont icon-a-fuzhi2' onClick={() => {
                             copy(detailMsg.current.merchant.name);
                             Toast.show('复制成功')
                         }}></p>
@@ -120,7 +120,7 @@ const DepositList = (): ReactElement<ReactNode> => {
                     <li>
                         <p>充币地址</p>
                         <p>{detailMsg.current.to}</p>
-                        <p className='iconfont icon-a-fuzhibeifen2' onClick={() => {
+                        <p className='iconfont icon-a-fuzhi2' onClick={() => {
                             copy(detailMsg.current.to);
                             Toast.show('复制成功')
                         }}></p>
@@ -128,7 +128,7 @@ const DepositList = (): ReactElement<ReactNode> => {
                     <li>
                         <p>提币金额</p>
                         <p className='strong-text'>{detailMsg.current.amount}</p>
-                        <p className='iconfont icon-a-fuzhibeifen2' onClick={() => {
+                        <p className='iconfont icon-a-fuzhi2' onClick={() => {
                             copy(String(detailMsg.current.amount));
                             Toast.show('复制成功')
                         }}></p>
@@ -166,7 +166,7 @@ const DepositList = (): ReactElement<ReactNode> => {
                                             <div className='img-text'>
                                                 <img src={item.logo} alt="" />
                                                 <div className='msg-text'>
-                                                    <p>{item.coin}</p>
+                                                    <p>{item.merchant.name} <span>{item.coin}</span> </p>
                                                     <p>{item.created_at}</p>
                                                 </div>
                                             </div>
@@ -178,22 +178,26 @@ const DepositList = (): ReactElement<ReactNode> => {
                                             </div>
                                         </div>
                                         <div className='pay-msg'>
-                                            <div className='msg-public'>
-                                                <p>商户名称</p>
-                                                <p>
-                                                    {item.merchant.name}
-                                                </p>
-                                            </div>
-                                            <div className='msg-public'>
+                                            <div className='msg-public need-hidden'>
                                                 <p>充币地址</p>
                                                 <p>
                                                     {item.to}
                                                 </p>
+                                                <span className='iconfont icon-a-fuzhi2' onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    copy(item.to)
+                                                    Toast.show('复制成功')
+                                                }}></span>
                                             </div>
                                             <div className='msg-public'>
                                                 <p>充值金额</p>
                                                 <p>
                                                     <span className='strong-text'>{item.amount.toFixed(4)}</span>
+                                                    <span className='iconfont icon-a-fuzhi2' onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        copy(String(item.amount));
+                                                        Toast.show('复制成功')
+                                                    }}></span>
                                                 </p>
                                             </div>
                                         </div>

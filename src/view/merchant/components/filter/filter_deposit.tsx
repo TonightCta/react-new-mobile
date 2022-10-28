@@ -43,7 +43,7 @@ const FilterDeposit = (): ReactElement<ReactNode> => {
     })
     return (
         <div className='filter-deposit filter-public'>
-            <p className='iconfont icon-shaixuan' onClick={() => {
+            <p className='iconfont icon-a-H5shaixuan' onClick={() => {
                 setFilterBox(true);
             }}></p>
             {/* 筛选弹框 */}

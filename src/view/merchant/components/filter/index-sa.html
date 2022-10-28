@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul li{
+            list-style: none;
+        }
+
+        .mine-error {
+            height: 100vh;
+            width: 100%;
+            padding-top: 200px;
+            text-align: center;
+        }
+        .mine-error .error-img{
+            width: 238px;
+            height: 168px;
+            margin:  0 auto;
+        }
+        .mine-error .remark-box{
+            width: calc(100% - 144px);
+            margin:  0 auto;
+            text-align: left;
+            margin-top: 20px;
+        }
+        .mine-error .remark-box p {
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+        }
+        .mine-error .remark-box ul li{
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+        .mine-error .reload-btn {
+            width: 104px;
+            height: 36px;
+            margin: 0 auto;
+            border-radius: 18px;
+            background-color: #1962F4;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .mine-error .reload-btn img{
+            width: 13px;
+            height: 13px;
+            margin-right: 7px;
+        }
+        .mine-error .reload-btn p {
+            font-size: 14px;
+            color: white;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <div class="mine-error">
+        <img class="error-img" src="https://bibiotc.oss-ap-southeast-1.aliyuncs.com/common/photo_2022-10-28_11-27-51.jpg" alt="">
+        <div class="remark-box">
+            <p>I 'm sorry! The app has failed~try the following</p>
+            <ul>
+                <li>1. Close and reopen the app completely</li>
+                <li>2. It may be a network problem. Click the refresh button to try</li>
+            </ul>
+        </div>
+        <div class="reload-btn" onclick="openLink()">
+            <img src="https://bibiotc.oss-ap-southeast-1.aliyuncs.com/common/reload2.png" alt="">
+            <p>Refresh</p>
+        </div>
+    </div>
+    <script>
+        const openLink = () => {
+            window.open('https://www.bibitrades.net/#/')
+        }
+    </script>
+</body>
+
+</html>
