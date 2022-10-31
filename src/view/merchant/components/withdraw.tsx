@@ -162,18 +162,28 @@ const WithdrawList = (): ReactElement<ReactNode> => {
                 }}>
                     <CloseOutline />
                 </span>
-                <img src={detailMsg.current.logo} alt="" />
-                <p className='coin-name'>{detailMsg.current.coin}</p>
-                <p className='order-date'>{detailMsg.current.created_at}</p>
+                <div className='coin-msg'>
+                    <img src={detailMsg.current.logo} alt="" />
+                    <div className='name-msg'>
+                        <p className='coin-name'>
+                            {detailMsg.current.merchant.name}
+                            <span className='coin'>{detailMsg.current.coin}</span>
+                            <span className={`order-status ${detailMsg.current.status == 0 && 'withdraw-pending' ||
+                                detailMsg.current.status == 2 && 'withdraw-reject' ||
+                                detailMsg.current.status == 3 && 'withdraw-done' || ''
+                                }`}>
+                                {/* 已拒绝 */}
+                                {
+                                    detailMsg.current.status == 0 && '提币中' ||
+                                    detailMsg.current.status == 2 && '已拒绝' ||
+                                    detailMsg.current.status == 3 && '提币完成' || 'UNKNOW'
+                                }
+                            </span>
+                        </p>
+                        <p className='order-date'>{detailMsg.current.created_at}</p>
+                    </div>
+                </div>
                 <ul>
-                    <li>
-                        <p>商户名称</p>
-                        <p>{detailMsg.current.merchant.name}</p>
-                        <p className='iconfont icon-a-fuzhi2' onClick={() => {
-                            copy(detailMsg.current.merchant.name);
-                            Toast.show('复制成功')
-                        }}></p>
-                    </li>
                     <li>
                         <p>订单号</p>
                         <p>{detailMsg.current.own_order_sn}</p>
@@ -193,21 +203,6 @@ const WithdrawList = (): ReactElement<ReactNode> => {
                         <p></p>
                     </li>
                     <li>
-                        <p>订单状态</p>
-                        <p className={`${detailMsg.current.status == 0 && 'withdraw-pending' ||
-                            detailMsg.current.status == 2 && 'withdraw-reject' ||
-                            detailMsg.current.status == 3 && 'withdraw-done' || ''
-                            }`}>
-                            {/* 已拒绝 */}
-                            {
-                                detailMsg.current.status == 0 && '提币中' ||
-                                detailMsg.current.status == 2 && '已拒绝' ||
-                                detailMsg.current.status == 3 && '提币完成' || 'UNKNOW'
-                            }
-                        </p>
-                        <p></p>
-                    </li>
-                    <li>
                         <p>提币金额</p>
                         <p className='strong-text'>{detailMsg.current.amount}</p>
                         <p className='iconfont icon-a-fuzhi2' onClick={() => {
@@ -215,26 +210,26 @@ const WithdrawList = (): ReactElement<ReactNode> => {
                             Toast.show('复制成功')
                         }}></p>
                     </li>
-                    <li onClick={() => {
-                        setDetailsBox(false);
-                    }} className={`${detailMsg.current.status === 3 && 'just-one'}`}>
-                        {
-                            detailMsg.current.status == 0 && <button className='default-btn' onClick={() => {
-                                setRejectBox(true)
-                            }}>拒绝</button>
-                        }
-                        {
-                            detailMsg.current.status == 0 && <button className='confirm-btn' onClick={() => {
-                                setHashBox(true)
-                            }}>填写HASH</button>
-                        }
-                        {
-                            detailMsg.current.status == 3 && <button className='confirm-btn' onClick={() => {
-                                window.open(detailMsg.current.url)
-                            }}>查看HASH</button>
-                        }
-                    </li>
                 </ul>
+                <div onClick={() => {
+                    setDetailsBox(false);
+                }} className={`view-outside ${detailMsg.current.status === 3 && 'just-one'}`}>
+                    {
+                        detailMsg.current.status == 0 && <button className='default-btn reject-btn' onClick={() => {
+                            setRejectBox(true)
+                        }}>拒绝</button>
+                    }
+                    {
+                        detailMsg.current.status == 0 && <button className='confirm-btn' onClick={() => {
+                            setHashBox(true)
+                        }}>填写HASH</button>
+                    }
+                    {
+                        detailMsg.current.status == 3 && <button className='confirm-btn' onClick={() => {
+                            window.open(detailMsg.current.url)
+                        }}>查看HASH</button>
+                    }
+                </div>
             </div>
         )
     }
@@ -278,7 +273,7 @@ const WithdrawList = (): ReactElement<ReactNode> => {
     }
     return (
         <div className='withdraw-list list-public'>
-            
+
             <PullToRefresh
                 onRefresh={async () => {
                     await sleep(1000);

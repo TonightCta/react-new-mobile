@@ -10,6 +10,7 @@ import OperAssets from './oper_assets';
 import { CheckBalanceApi, CheckProfitApi } from '../../../request/api';
 import { Inner } from './balance_card';
 import CountCard from './count_card';
+import { useNavigate } from 'react-router-dom';
 
 interface Account {
     name: string,
@@ -49,7 +50,6 @@ const AccountCard = (): ReactElement<ReactNode> => {
         id: '',
     });
     const { deposit_fee } = state || [];
-    console.log(state)
     const [visible, setVisible] = useState<boolean>(false);
     const [assetType, setAssetType] = useState<number>(1)
     useEffect(() => {
@@ -68,6 +68,7 @@ const AccountCard = (): ReactElement<ReactNode> => {
         usdt: 0,
         mch_id: account.mch_id,
     });
+    const navigate = useNavigate();
     const PopBalance = (): ReactElement => {
         return (
             <div className='popver-content'>
@@ -113,7 +114,12 @@ const AccountCard = (): ReactElement<ReactNode> => {
             {/* 账户操作 */}
             {
                 admin && <div className='account-oper'>
-                    <div color='primary' className={`auth-status ${account.ga === 1 && 'has-auth'}`}> {account.ga === 0 ? '未' : '已'}绑定</div>
+                    <div color='primary' onClick={() => {
+                        if(account.ga === 1 ){
+                            return
+                        };
+                        navigate('/google-auth')
+                    }} className={`auth-status ${account.ga === 1 && 'has-auth'}`}> {account.ga === 0 ? '未' : '已'}绑定</div>
                     <Button color='primary' size='small' onClick={async () => {
                         Toast.show({
                             content: '查询中...',

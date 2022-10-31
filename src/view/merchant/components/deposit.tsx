@@ -100,18 +100,17 @@ const DepositList = (): ReactElement<ReactNode> => {
                 }}>
                     <CloseOutline />
                 </span>
-                <img src={detailMsg.current.logo} alt="" />
-                <p className='coin-name'>{detailMsg.current.coin}</p>
-                <p className='order-date'>{detailMsg.current.created_at}</p>
+                <div className='coin-msg'>
+                    <img src={detailMsg.current.logo} alt="" />
+                    <div className='name-msg'>
+                        <p className='coin-name'>
+                            {detailMsg.current.merchant.name}
+                            <span className='coin'>{detailMsg.current.coin}</span>
+                        </p>
+                        <p className='order-date'>{detailMsg.current.created_at}</p>
+                    </div>
+                </div>
                 <ul>
-                    <li>
-                        <p>商户名称</p>
-                        <p>{detailMsg.current.merchant.name}</p>
-                        <p className='iconfont icon-a-fuzhi2' onClick={() => {
-                            copy(detailMsg.current.merchant.name);
-                            Toast.show('复制成功')
-                        }}></p>
-                    </li>
                     <li>
                         <p>订单号</p>
                         <p>{detailMsg.current.id}</p>
@@ -133,12 +132,13 @@ const DepositList = (): ReactElement<ReactNode> => {
                             Toast.show('复制成功')
                         }}></p>
                     </li>
-                    <li>
-                        <button color='primary' onClick={() => {
-                            window.open(detailMsg.current.url)
-                        }}>查看HASH</button>
-                    </li>
                 </ul>
+                <div className='view-outside'>
+                    <button color='primary' onClick={() => {
+                        setDetailBox(false)
+                        window.open(detailMsg.current.url)
+                    }}>查看HASH</button>
+                </div>
             </div>
         )
     };

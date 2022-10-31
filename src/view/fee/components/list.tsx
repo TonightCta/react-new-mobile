@@ -98,21 +98,18 @@ const FeeList = (): ReactElement<ReactNode> => {
                 }}>
                     <CloseOutline />
                 </span>
-                <img src={detailMsg.current.logo} alt="" />
-                <p className='coin-name'>
-                    {detailMsg.current.coin} <br />
-                    <span className={`${detailMsg.current.type == 1 ? 'in' : 'out'}`}>{detailMsg.current.type == 1 ? '利润结算' : '余额提取'}</span>
-                </p>
-                {/* <p className='order-date'>{detailMsg.current.created_at}</p> */}
+                <div className='coin-msg'>
+                    <img src={detailMsg.current.logo} alt="" />
+                    <div className='name-msg'>
+                        <p className='coin-name'>
+                            {detailMsg.current.mch_name}
+                            <span className='coin'>{detailMsg.current.coin}</span>
+                            <span className={`${detailMsg.current.type == 1 ? 'in' : 'out'}`}>{detailMsg.current.type == 1 ? '利润结算' : '余额提取'}</span>
+                        </p>
+                        <p className='order-date'>{detailMsg.current.created_at}</p>
+                    </div>
+                </div>
                 <ul>
-                    <li>
-                        <p>商户名称</p>
-                        <p>{detailMsg.current.mch_name}</p>
-                        <p className='iconfont icon-a-fuzhi2' onClick={() => {
-                            copy(detailMsg.current.mch_name);
-                            Toast.show('复制成功')
-                        }}></p>
-                    </li>
                     <li>
                         <p>操作时间</p>
                         <p>{detailMsg.current.created_at}</p>
@@ -146,12 +143,12 @@ const FeeList = (): ReactElement<ReactNode> => {
                         <p>转出数量</p>
                         <p className='strong-text'>{detailMsg.current.amount}</p>
                     </li>
-                    <li>
-                        <button color='primary' onClick={() => {
-                            window.open(detailMsg.current.link)
-                        }}>查看HASH</button>
-                    </li>
                 </ul>
+                <div className='view-outside'>
+                    <button color='primary' onClick={() => {
+                        window.open(detailMsg.current.link)
+                    }}>查看HASH</button>
+                </div>
             </div>
         )
     };

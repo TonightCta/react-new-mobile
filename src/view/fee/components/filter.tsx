@@ -133,7 +133,10 @@ const FilterFee = (): ReactElement<ReactNode> => {
                     <div className='oper-btn'>
                         <Button color='default' onClick={() => {
                             setFilterMsg(source)
-                        }}>重置</Button>
+                        }}>
+                            重置
+                            <span className='mask'></span>
+                        </Button>
                         <Button color='primary' onClick={() => {
                             dispatch({
                                 type: Type.SET_FILTER_FEE,

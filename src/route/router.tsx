@@ -27,6 +27,10 @@ const RouteConfig = (): ReactElement<ReactNode> => {
                         <Route path='/merchant' element={<Suspense fallback={<RouteLoading />}>
                             <View.MerchantView />
                         </Suspense>}></Route>
+                        {/* 谷歌验证 */}
+                        <Route path='/google-auth' element={<Suspense fallback={<RouteLoading />}>
+                            <View.AuthIndex />
+                        </Suspense>}></Route>
                     </Route>
                     {/* 登录 */}
                     <Route path='/login' element={<Suspense fallback={<RouteLoading />}>

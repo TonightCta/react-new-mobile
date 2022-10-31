@@ -37,3 +37,7 @@ export const CheckBalanceApi = (p:o) => post<IResponse>('/manager/beforeCheckout
 export const ClearBalanceApi = (p:o) => post<IResponse>('/manager/checkoutBalance',p);
 //清算历史
 export const ButtlistApi = (p:o) => post<IResponse>('/analysis/profitHistory',p);
+//谷歌验证码
+export const GoogleAuthApi = (p:o) => post<IResponse>('/user/getGoogleAuth',p);
+//绑定谷歌验证码
+export const GoogleAuthBindApi = (p:o) => post<IResponse>('/user/bindGoogleAuth',p);

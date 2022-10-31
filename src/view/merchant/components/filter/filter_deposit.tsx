@@ -19,8 +19,8 @@ interface Filter {
 
 const source: FilterD = {
     merchant: '',
-    merchant_name:'',
-    merchant_email:'',
+    merchant_name: '',
+    merchant_email: '',
     coin: '',
     order_id: '',
     address: '',
@@ -167,7 +167,10 @@ const FilterDeposit = (): ReactElement<ReactNode> => {
                     <div className='oper-btn'>
                         <Button color='default' onClick={() => {
                             setFilterMsg(source)
-                        }}>重置</Button>
+                        }}>
+                            重置
+                            <span className='mask'></span>
+                        </Button>
                         <Button color='primary' onClick={() => {
                             dispatch({
                                 type: Type.SET_DEPOSIT_FILTER,
@@ -181,12 +184,12 @@ const FilterDeposit = (): ReactElement<ReactNode> => {
                 </div>
             </Popup>
             {/* 选择商家 */}
-            <SelectMerchant value={selectPopup.merchant} merchartResult={(value: string,name:string,email:string) => {
+            <SelectMerchant value={selectPopup.merchant} merchartResult={(value: string, name: string, email: string) => {
                 setFilterMsg({
                     ...filterMsg,
                     merchant: value,
-                    merchant_name:name,
-                    merchant_email:email
+                    merchant_name: name,
+                    merchant_email: email
                 })
             }} resetValue={(value: boolean) => {
                 setSelectPopup({
